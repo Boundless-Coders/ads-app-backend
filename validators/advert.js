@@ -7,7 +7,7 @@ export const addAdvertValidator = Joi.object({
     price: Joi.number().positive(), // Price should be a positive number and is required
     category: Joi.string(),       // Category of the advert is required
     image: Joi.string(),          // Image URL or path is required
-    vendor: Joi.string()          // Vendor ID is required
+    // vendor: Joi.string()          // Vendor ID is required
 });
 
 // Validator for updating an existing advert

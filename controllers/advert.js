@@ -6,14 +6,18 @@ export const addAdvert = async (req, res, next) => {
         const { error, value } = addAdvertValidator.validate({
             ...req.body,
             image: req.file?.filename,
-           
+
         })
         if (error) {
             return res.status(422).json(error);
         }
 
-        await AdvertModel.create(value);
+        await AdvertModel.create({
+            ...value,
+            user: req.auth.id
+        });
         res.status(201).json('Advert was added');
+
     } catch (error) {
         next(error);
     }
@@ -34,29 +38,29 @@ export const getAdverts = async (req, res, next) => {
     }
 };
 
-export const countAdverts =async (req, res, next) => {
-       try {
-         const {}= req.body;
-         //count adverts in database
-         const count = await AdvertModel.countDocuments(JSON.parse(filter));
- //Respond to request
- res.json({count})
-       } catch (error) {
-        next (error);
-        
-       }
-    }
+export const countAdverts = async (req, res, next) => {
+    try {
+        const { } = req.body;
+        //count adverts in database
+        const count = await AdvertModel.countDocuments(JSON.parse(filter));
+        //Respond to request
+        res.json({ count })
+    } catch (error) {
+        next(error);
 
-    export const getAdvert =async (req, res, next) => {
-        try {
-            const {id} = req.params;
-            //Get advert by id from database
-            const advert = await AdvertModel.findById(id);
-        } catch (error) {
-            next(error);
-            
-        }
     }
+}
+
+export const getAdvert = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        //Get advert by id from database
+        const advert = await AdvertModel.findById(id);
+    } catch (error) {
+        next(error);
+
+    }
+}
 
 export const updateAdvert = async (req, res, next) => {
     try {
@@ -77,11 +81,11 @@ export const updateAdvert = async (req, res, next) => {
 };
 
 
-export const deleteAdvert = async(req, res, next) => {
+export const deleteAdvert = async (req, res, next) => {
     try {
         await AdvertModel.findByIdAndDelete(req.params.id);
         res.json('Advert deleted');
-    }catch (error) {
+    } catch (error) {
         next(error);
     }
 };

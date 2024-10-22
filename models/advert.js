@@ -7,7 +7,7 @@ const advertSchema = new Schema({
     price: { type: Number}, // Price of the product/service
     category: { type: String}, // Category the advert falls under
     image: { type: String}, // URL or path to the image
-    vendor: { type: Schema.Types.ObjectId, ref: 'User'} 
+    vendor: { type: Schema.Types.ObjectId, required: true, ref: 'User'} 
     // Reference to the user who posted the advert
 }, {
     timestamps: true,

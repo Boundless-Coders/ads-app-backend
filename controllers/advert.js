@@ -56,6 +56,7 @@ export const getAdvert = async (req, res, next) => {
         const { id } = req.params;
         //Get advert by id from database
         const advert = await AdvertModel.findById(id);
+        res.json(advert);
     } catch (error) {
         next(error);
 
@@ -72,7 +73,7 @@ export const updateAdvert = async (req, res, next) => {
             return res.status(422).json(error);
         }
         // Update the advert
-        await AdvertModel.findByIdAndUpdate(req.params.id, value);
+        const advert = await AdvertModel.findByIdAndUpdate(req.params.id, value);
         // Respond with success message
         res.json('Advert updated');
     } catch (error) {

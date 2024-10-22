@@ -7,6 +7,6 @@ export const mailTransporter = createTransport({
     secure: true, // Use SSL
     auth: {
         user: 'frankkoomson1@gmail.com', // Replace with your email address
-        pass: 'wddr svxs qkci epqw'       // app-specific password (generated in Google Account)
+        pass:  process.env.MAIL_PASS_KEY     // app-specific password (generated in Google Account)
     }
 });

@@ -2,9 +2,10 @@ import Joi from "joi";
 
 // Validator for user registration
 export const registerUserValidator = Joi.object({
-    name: Joi.string().required(),            
+    userName: Joi.string().required(),            
     email: Joi.string().email().required(),    
     password: Joi.string().min(6).required(), 
+    contactNumber: Joi.number().required(),
     role: Joi.string().valid('user', 'vendor', 'admin').default('user')
 });
 

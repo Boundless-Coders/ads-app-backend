@@ -3,7 +3,7 @@ import { toJSON } from "@reis/mongoose-to-json";
 
 
 const userSchema = new Schema({
-    userName: { type: String, required: true },
+    name: { type: String, required: true },
     businessName: {type: String},
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },

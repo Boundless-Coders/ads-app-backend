@@ -25,18 +25,42 @@ export const addAdvert = async (req, res, next) => {
 
 export const getAdverts = async (req, res, next) => {
     try {
-        const { filter = "{}", sort = "{}", limit = 10, skip = 0 } = req.query;
-        const adverts = await AdvertModel
-            .find(JSON.parse(filter))
-            .sort(JSON.parse(sort))
-            .limit(limit)
-            .skip(skip);
+        // Extract query params
+        const { title, category, minPrice, maxPrice, limit = 10, skip = 0, sort = "{}" } = req.query;
+        let filter = {}; // Initialize an empty filter object
 
+        // If title query param exists, perform a case-insensitive search on the title field
+        if (title) {
+            filter.title = { $regex: title, $options: 'i' }; // 'i' for case-insensitive
+        }
+
+        // If category query param exists, add it to the filter
+        if (category) {
+            filter.category = category;
+        }
+
+        // If minPrice or maxPrice query params exist, filter by price range
+        if (minPrice || maxPrice) {
+            filter.price = {};
+            if (minPrice) filter.price.$gte = minPrice; // Greater than or equal to minPrice
+            if (maxPrice) filter.price.$lte = maxPrice; // Less than or equal to maxPrice
+        }
+
+        // Fetch adverts from the database based on filter, with pagination and sorting
+        const adverts = await AdvertModel
+            .find(filter)
+            .sort(JSON.parse(sort)) // Sort by the provided sort query
+            .limit(Number(limit))   // Limit number of results
+            .skip(Number(skip));    // Skip the first n results for pagination
+
+        // Respond with the list of adverts
         res.status(200).json(adverts);
     } catch (error) {
-        next(error);
+        next(error); // Pass any error to the error handler middleware
     }
 };
+
+
 
 export const countAdverts = async (req, res, next) => {
     try {
@@ -90,3 +114,6 @@ export const deleteAdvert = async (req, res, next) => {
         next(error);
     }
 };
+
+
+

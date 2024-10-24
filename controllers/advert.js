@@ -27,7 +27,7 @@ export const getAdverts = async (req, res, next) => {
     try {
         // Extract query params
         const { title, category, minPrice, maxPrice, limit = 10, skip = 0, sort = "{}" } = req.query;
-        let filter = {}; // Initialize an empty filter object
+        let filter = {}; 
 
         // If title query param exists, perform a case-insensitive search on the title field
         if (title) {
@@ -42,8 +42,8 @@ export const getAdverts = async (req, res, next) => {
         // If minPrice or maxPrice query params exist, filter by price range
         if (minPrice || maxPrice) {
             filter.price = {};
-            if (minPrice) filter.price.$gte = minPrice; // Greater than or equal to minPrice
-            if (maxPrice) filter.price.$lte = maxPrice; // Less than or equal to maxPrice
+            if (minPrice) filter.price.$gte = minPrice; 
+            if (maxPrice) filter.price.$lte = maxPrice; 
         }
 
         // Fetch adverts from the database based on filter, with pagination and sorting

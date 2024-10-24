@@ -5,8 +5,8 @@ export const permissions = [
         actions: [
             'get_profile',
             'update_profile',
-            'view_adverts',        // Ability to view adverts
-            'contact_vendor'       // Ability to contact vendors
+            'view_adverts',        
+            'contact_vendor'       
         ]
     },
     {
@@ -14,11 +14,11 @@ export const permissions = [
         actions: [
             'get_profile',
             'update_profile',
-            'add_advert',           // Ability to add a new advert
-            'update_advert',        // Ability to update their own adverts
-            'delete_advert',        // Ability to delete their own adverts
-            'view_adverts',         // Ability to view all adverts
-            'manage_own_adverts'    // Manage adverts posted by the vendor
+            'add_advert',           
+            'update_advert',        
+            'delete_advert',        
+            'view_adverts',         
+            'manage_own_adverts'    
         ]
     }
 ]

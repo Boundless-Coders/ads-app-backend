@@ -7,12 +7,12 @@ import { isAuthenticated, hasPermission } from "../middlewares/auth.js";
 const userRouter = Router();
 
 
-userRouter.post('/register', registerUser);
-userRouter.post('/login', loginUser);
-userRouter.get('/profile', isAuthenticated, hasPermission ('get_profile'), getProfile);
+userRouter.post('/users/register', registerUser);
+userRouter.post('/users/login', loginUser);
+userRouter.get('/users/me', isAuthenticated, getProfile);
 userRouter.get('/users/me/adverts', isAuthenticated, getUserAdverts);
 userRouter.delete('/delete', isAuthenticated, hasPermission('delete_profile'), deleteUserProfile) 
-userRouter.patch('/update', isAuthenticated, hasPermission('update_profile'), userAvatarUpload.single('avatar'), updateProfile);
+userRouter.patch('/users/me', isAuthenticated, hasPermission('update_profile'), userAvatarUpload.single('avatar'), updateProfile);
 
-
+// Export router
 export default userRouter;

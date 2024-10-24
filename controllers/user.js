@@ -1,4 +1,4 @@
-import { registerUserValidator, loginUserValidator, updateProfileValidator, deleteProfileValidator } from "../validators/user.js";
+import { registerUserValidator, loginUserValidator, updateProfileValidator } from "../validators/user.js";
 import { UserModel } from "../models/user.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
@@ -131,18 +131,18 @@ export const updateProfile = async (req, res, next) => {
 };
 
 // Update user profile
-export const deleteUserProfile = async (req, res, next) => {
-    try {
-        const { error, value } = deleteProfileValidator.validate({
-            ...req.body,
-            avatar: req.file?.filename
-        });
-        if (error) {
-            return res.status(422).json(error);
-        }
-        await UserModel.findByIdAndDelete(req.auth.id, value);
-        res.json('User profile deleted');
-    } catch (error) {
-        next(error);
-    }
-};
+// export const deleteUserProfile = async (req, res, next) => {
+//     try {
+//         const { error, value } = deleteProfileValidator.validate({
+//             ...req.body,
+//             avatar: req.file?.filename
+//         });
+//         if (error) {
+//             return res.status(422).json(error);
+//         }
+//         await UserModel.findByIdAndDelete(req.auth.id, value);
+//         res.json('User profile deleted');
+//     } catch (error) {
+//         next(error);
+//     }
+// };

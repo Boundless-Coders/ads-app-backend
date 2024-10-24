@@ -22,7 +22,7 @@ export const updateProfileValidator = Joi.object({
     avatar: Joi.string()                       
 });
 
-export const deleteProfileValidator = Joi.object({
-    name: Joi.string(),                       
-    avatar: Joi.string()                       
-});
+// export const deleteProfileValidator = Joi.object({
+//     name: Joi.string(),                       
+//     avatar: Joi.string()                       
+// });

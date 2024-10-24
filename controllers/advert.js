@@ -29,17 +29,16 @@ export const getAdverts = async (req, res, next) => {
         const { title, category, minPrice, maxPrice, limit = 10, skip = 0, sort = "{}" } = req.query;
         let filter = {}; 
 
-        // If title query param exists, perform a case-insensitive search on the title field
+      
         if (title) {
             filter.title = { $regex: title, $options: 'i' }; // 'i' for case-insensitive
         }
 
-        // If category query param exists, add it to the filter
+        
         if (category) {
             filter.category = category;
         }
 
-        // If minPrice or maxPrice query params exist, filter by price range
         if (minPrice || maxPrice) {
             filter.price = {};
             if (minPrice) filter.price.$gte = minPrice; 
